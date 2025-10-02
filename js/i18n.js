@@ -286,6 +286,7 @@ class I18n {
         
         // Mettre à jour l'attribut lang du HTML
         document.documentElement.lang = this.currentLanguage;
+        this.observeDOMChanges();
     }
     
     setLanguage(language) {
@@ -335,6 +336,22 @@ class I18n {
         });
     }
     
+    observeDOMChanges() {
+        if (this.observer) {
+            this.observer.disconnect();
+        }
+
+        this.observer = new MutationObserver(mutations => {
+            mutations.forEach(mutation => {
+                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                    this.applyTranslations();
+                }
+            });
+        });
+
+        this.observer.observe(document.body, { childList: true, subtree: true });
+    }
+
     getCurrentLanguage() {
         return this.currentLanguage;
     }

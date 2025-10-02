@@ -1,58 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abaya Elegance - Premium Islamic Fashion</title>
-    <meta name="description" content="Discover our exquisite collection of traditional and modern abayas. Premium quality Islamic fashion for the modern woman.">
+    <title>Abaya Elegance - Mode Islamique Premium</title>
+    <meta name="description" content="Découvrez notre exquise collection d'abayas traditionnelles et modernes. Mode islamique de qualité premium pour la femme moderne.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" crossorigin href="/assets/index-7h2-lO8u.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-CDv3oHjS.css">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="header-content">
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <!-- Logo -->
                 <div class="logo">
-                    <h1><i class="fas fa-moon"></i> Abaya Elegance</h1>
+                    <a href="index.html">
+                        <h1>Abaya Elegance</h1>
+                    </a>
                 </div>
                 
-                <nav class="nav">
+                <!-- Navigation -->
+                <nav class="nav" id="mainNav">
                     <ul class="nav-list">
-                        <li><a href="#home" class="nav-link active">Home</a></li>
-                        <li><a href="catalog.html" class="nav-link">Catalog</a></li>
-                        <li><a href="about.html" class="nav-link">About</a></li>
-                        <li><a href="contact.html" class="nav-link">Contact</a></li>
-                    </ul>
+                    <li><a href="index.html" class="nav-link active" data-i18n="home">Accueil</a></li>
+                    <li class="dropdown">
+                        <a href="catalog.html" class="nav-link" data-i18n="categories">Catégories <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu" id="categoriesMenu">
+                            <!-- Categories will be loaded dynamically -->
+                        </ul>
+                    </li>
+                    <li><a href="catalog.html" class="nav-link" data-i18n="shop">Boutique</a></li>
+                    <li><a href="about.html" class="nav-link" data-i18n="about">À propos</a></li>
+                    <li><a href="contact.html" class="nav-link" data-i18n="contact">Contact</a></li>
+                </ul>
                 </nav>
                 
+                <!-- Header Actions -->
                 <div class="header-actions">
-                    <button class="search-btn" id="searchBtn">
+                    <div class="language-selector">
+                        <select aria-label="Sélecteur de langue">
+                            <option value="fr">FR</option>
+                            <option value="en">EN</option>
+                        </select>
+                    </div>
+                    <button class="search-toggle" id="searchToggle">
                         <i class="fas fa-search"></i>
                     </button>
-                    <a href="cart.html" class="cart-btn">
-                        <i class="fas fa-shopping-bag"></i>
-                        <span class="cart-count" id="cartCount">0</span>
-                    </a>
-                    <div class="auth-buttons">
-                        <a href="login.html" class="btn-secondary" id="loginBtn">Login</a>
-                        <a href="account.html" class="btn-primary" id="accountBtn" style="display: none;">Account</a>
+                    
+                    <div class="user-menu">
+                        <button class="user-toggle" id="userToggle">
+                            <i class="fas fa-user"></i>
+                        </button>
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="auth-links" id="authLinks">
+                                <a href="login.html">Sign In</a>
+                                <a href="register.html">Register</a>
+                            </div>
+                            <div class="user-links" id="userLinks" style="display: none;">
+                                <a href="account.html">My Account</a>
+                                <a href="account.html#orders">Orders</a>
+                                <a href="#" id="signOutBtn">Sign Out</a>
+                            </div>
+                        </div>
                     </div>
-                    <button class="mobile-menu-btn" id="mobileMenuBtn">
-                        <i class="fas fa-bars"></i>
-                    </button>
+                    
+                    <div class="cart-icon">
+                        <a href="cart.html">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span class="cart-count" id="cartCount">0</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <nav class="mobile-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="catalog.html">Shop All</a></li>
+                    <li class="mobile-dropdown">
+                        <button class="mobile-dropdown-toggle">Collections <i class="fas fa-chevron-down"></i></button>
+                        <ul class="mobile-dropdown-menu" id="mobileCategoriesMenu">
+                            <!-- Categories will be loaded dynamically -->
+                        </ul>
+                    </li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="mobile-menu-actions">
+                <div class="mobile-auth" id="mobileAuth">
+                    <a href="login.html" class="btn-outline">Sign In</a>
+                    <a href="register.html" class="btn-primary">Register</a>
+                </div>
+                <div class="mobile-user" id="mobileUser" style="display: none;">
+                    <a href="account.html">My Account</a>
+                    <a href="#" id="mobileSignOutBtn">Sign Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Search Overlay -->
     <div class="search-overlay" id="searchOverlay">
         <div class="search-container">
-            <input type="text" placeholder="Search for abayas..." class="search-input" id="searchInput">
+            <div class="search-box">
+                <input type="text" placeholder="Search for abayas..." id="searchInput">
+                <button class="search-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
             <button class="search-close" id="searchClose">
                 <i class="fas fa-times"></i>
             </button>
@@ -64,11 +137,11 @@
         <div class="hero-content">
             <div class="container">
                 <div class="hero-text">
-                    <h2 class="hero-title">Elegant Abayas for the Modern Woman</h2>
-                    <p class="hero-subtitle">Discover our exquisite collection of traditional and contemporary abayas, crafted with premium fabrics and attention to detail.</p>
+                    <h2 class="hero-title" data-i18n="heroTitle">Elegant Abayas for the Modern Woman</h2>
+                    <p class="hero-subtitle" data-i18n="heroSubtitle">Discover our exquisite collection of traditional and contemporary abayas, crafted with premium fabrics and attention to detail.</p>
                     <div class="hero-buttons">
-                        <a href="catalog.html" class="btn-primary">Shop Collection</a>
-                        <a href="#featured" class="btn-secondary">View Featured</a>
+                        <a href="catalog.html" class="btn-primary" data-i18n="shopCollection">Shop Collection</a>
+                        <a href="#featured" class="btn-secondary" data-i18n="viewFeatured">View Featured</a>
                     </div>
                 </div>
             </div>
@@ -82,7 +155,7 @@
     <section class="featured-collections" id="featured">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Featured Collections</h2>
+                <h2 class="section-title" data-i18n="featuredCollections">Featured Collections</h2>
                 <p class="section-subtitle">Explore our carefully curated collections</p>
             </div>
             
@@ -96,7 +169,7 @@
     <section class="new-arrivals">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">New Arrivals</h2>
+                <h2 class="section-title" data-i18n="newArrivals">New Arrivals</h2>
                 <p class="section-subtitle">Latest additions to our collection</p>
             </div>
             
@@ -105,7 +178,7 @@
             </div>
             
             <div class="section-footer">
-                <a href="catalog.html" class="btn-primary">View All Products</a>
+                <a href="catalog.html" class="btn-primary" data-i18n="viewAllProducts">View All Products</a>
             </div>
         </div>
     </section>
@@ -115,23 +188,23 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
-                    <h2 class="section-title">About Abaya Elegance</h2>
-                    <p>We are dedicated to providing the finest quality abayas that blend traditional Islamic values with contemporary fashion. Our collection features carefully selected fabrics, exquisite craftsmanship, and designs that celebrate the beauty of modest fashion.</p>
+                    <h2 class="section-title" data-i18n="aboutTitle">About Abaya Elegance</h2>
+                    <p data-i18n="aboutDesc">We are dedicated to providing the finest quality abayas that blend traditional Islamic values with contemporary fashion. Our collection features carefully selected fabrics, exquisite craftsmanship, and designs that celebrate the beauty of modest fashion.</p>
                     <div class="features">
                         <div class="feature">
                             <i class="fas fa-star"></i>
-                            <h3>Premium Quality</h3>
-                            <p>Only the finest fabrics and materials</p>
+                            <h3 data-i18n="premiumQuality">Premium Quality</h3>
+                            <p data-i18n="premiumDesc">Only the finest fabrics and materials</p>
                         </div>
                         <div class="feature">
                             <i class="fas fa-heart"></i>
-                            <h3>Modest Fashion</h3>
-                            <p>Designs that honor Islamic values</p>
+                            <h3 data-i18n="modestFashion">Modest Fashion</h3>
+                            <p data-i18n="modestDesc">Designs that honor Islamic values</p>
                         </div>
                         <div class="feature">
                             <i class="fas fa-shipping-fast"></i>
-                            <h3>Fast Delivery</h3>
-                            <p>Quick and secure worldwide shipping</p>
+                            <h3 data-i18n="fastDelivery">Fast Delivery</h3>
+                            <p data-i18n="fastDesc">Quick and secure worldwide shipping</p>
                         </div>
                     </div>
                 </div>
@@ -146,63 +219,72 @@
     <section class="newsletter">
         <div class="container">
             <div class="newsletter-content">
-                <h2>Stay Updated</h2>
-                <p>Subscribe to our newsletter for the latest collections and exclusive offers</p>
+                <h2 data-i18n="stayUpdated">Stay Updated</h2>
+                <p data-i18n="newsletterDesc">Subscribe to our newsletter for the latest collections and exclusive offers</p>
                 <form class="newsletter-form" id="newsletterForm">
-                    <input type="email" placeholder="Enter your email" required>
-                    <button type="submit" class="btn-primary">Subscribe</button>
+                    <input type="email" placeholder="Enter your email" data-i18n="enterEmail" required>
+                    <button type="submit" class="btn-primary" data-i18n="subscribe">Subscribe</button>
                 </form>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer" id="contact">
+    <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Abaya Elegance</h3>
-                    <p>Premium Islamic fashion for the modern woman. Quality, elegance, and modesty in every piece.</p>
+                    <p data-i18n="aboutDesc">Discover the perfect blend of tradition and contemporary style with our exquisite collection of abayas.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
                     </div>
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
+                    <h4 data-i18n="quickLinks">Quick Links</h4>
                     <ul>
-                        <li><a href="catalog.html">Shop All</a></li>
+                        <li><a href="index.html" data-i18n="home">Home</a></li>
+                        <li><a href="catalog.html" data-i18n="shop">Shop</a></li>
+                        <li><a href="about.html" data-i18n="aboutUs">About Us</a></li>
+                        <li><a href="contact.html" data-i18n="contact">Contact</a></li>
                         <li><a href="#">Size Guide</a></li>
-                        <li><a href="#">Care Instructions</a></li>
-                        <li><a href="#">Returns</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Customer Service</h4>
+                    <h4 data-i18n="customerService">Customer Service</h4>
                     <ul>
-                        <li><a href="#">Contact Us</a></li>
                         <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
                         <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Track Order</a></li>
                         <li><a href="#">Support</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
-                    <h4>Contact Info</h4>
-                    <div class="contact-info">
-                        <p><i class="fas fa-envelope"></i> info@abayaelegance.com</p>
-                        <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
-                        <p><i class="fas fa-map-marker-alt"></i> 123 Fashion Street, City</p>
-                    </div>
+                    <h4 data-i18n="newsletter">Newsletter</h4>
+                    <p data-i18n="newsletterDesc">Subscribe to receive updates on new arrivals and exclusive offers.</p>
+                    <form class="newsletter-form" id="footerNewsletterForm">
+                        <input type="email" placeholder="Enter your email" data-i18n="enterEmail" required>
+                        <button type="submit" data-i18n="subscribe">Subscribe</button>
+                    </form>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2024 Abaya Elegance. All rights reserved.</p>
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 Abaya Elegance. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
@@ -217,6 +299,7 @@
     <script src="js/config.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/cart.js"></script>
+    <script src="js/i18n.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
