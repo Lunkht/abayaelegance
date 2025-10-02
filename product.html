@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Abaya Elegance</title>
+    <meta name="description" content="View detailed information about our elegant abayas including images, sizes, colors, and customer reviews.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "",
+      "image": [],
+      "description": "",
+      "brand": {
+        "@type": "Brand",
+        "name": "Abaya Elegance"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "",
+        "priceCurrency": "USD",
+        "price": "",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+    </script>
+    <script>
+      (function() {
+        try {
+          var path = window.location.pathname || '';
+          if (path.indexOf('product.html') !== -1) {
+            var qs = window.location.search || '';
+            var hash = window.location.hash || '';
+            window.location.replace('product-details.html' + qs + hash);
+          }
+        } catch (e) {}
+      })();
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <h1>Abaya Elegance</h1>
+                    </a>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link" data-i18n="home">Accueil</a></li>
+                        <li class="dropdown">
+                            <a href="catalog.html" class="nav-link" data-i18n="categories">Catégories <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu" id="categoriesMenu">
+                                <!-- Categories will be loaded dynamically -->
+                            </ul>
+                        </li>
+                        <li><a href="catalog.html" class="nav-link" data-i18n="shop">Boutique</a></li>
+                        <li><a href="about.html" class="nav-link" data-i18n="about">À propos</a></li>
+                        <li><a href="contact.html" class="nav-link" data-i18n="contact">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <div class="language-selector">
+                        <select aria-label="Sélecteur de langue">
+                            <option value="fr">FR</option>
+                            <option value="en">EN</option>
+                        </select>
+                    </div>
+                    <button class="search-toggle" id="searchToggle">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    
+                    <div class="user-menu">
+                        <button class="user-toggle" id="userToggle">
+                            <i class="fas fa-user"></i>
+                        </button>
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="auth-links" id="authLinks">
+                                <a href="login.html">Sign In</a>
+                                <a href="register.html">Register</a>
+                            </div>
+                            <div class="user-links" id="userLinks" style="display: none;">
+                                <a href="account.html">My Account</a>
+                                <a href="account.html#orders">Orders</a>
+                                <a href="#" id="signOutBtn">Sign Out</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cart-icon">
+                        <a href="cart.html">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span class="cart-count" id="cartCount">0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <nav class="mobile-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="catalog.html">Shop All</a></li>
+                    <li class="mobile-dropdown">
+                        <button class="mobile-dropdown-toggle">Collections <i class="fas fa-chevron-down"></i></button>
+                        <ul class="mobile-dropdown-menu" id="mobileCategoriesMenu">
+                            <!-- Categories will be loaded dynamically -->
+                        </ul>
+                    </li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="mobile-menu-actions">
+                <div class="mobile-auth" id="mobileAuth">
+                    <a href="login.html" class="btn-outline">Sign In</a>
+                    <a href="register.html" class="btn-primary">Register</a>
+                </div>
+                <div class="mobile-user" id="mobileUser" style="display: none;">
+                    <a href="account.html">My Account</a>
+                    <a href="#" id="mobileSignOutBtn">Sign Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" placeholder="Search for abayas..." id="searchInput">
+                <button class="search-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <button class="search-close" id="searchClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <nav>
+                <ol>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="catalog.html">Shop</a></li>
+                    <li id="breadcrumbCategory"><a href="#" data-i18n="category">Catégorie</a></li>
+                    <li id="breadcrumbProduct" data-i18n="product">Produit</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Product Details -->
+        <section class="product-details">
+            <div class="container">
+                <!-- Loading State -->
+                <div class="loading-state" id="loadingState">
+                    <div class="loading-spinner"></div>
+                    <p>Loading product details...</p>
+                </div>
+                
+                <!-- Error State -->
+                <div class="error-state" id="errorState" style="display: none;">
+                    <div class="error-content">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h2>Product Not Found</h2>
+                        <p>The product you're looking for doesn't exist or has been removed.</p>
+                        <a href="catalog.html" class="btn-primary">Browse Products</a>
+                    </div>
+                </div>
+                
+                <!-- Product Content -->
+                <div class="product-content" id="productContent" style="display: none;">
+                    <div class="product-layout">
+                        <!-- Product Images -->
+                        <div class="product-images">
+                            <div class="main-image">
+                                <img id="mainImage" src="" alt="" loading="lazy">
+                                <div class="image-zoom" id="imageZoom"></div>
+                                
+                                <!-- Image Navigation -->
+                                <button class="image-nav prev" id="prevImage">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="image-nav next" id="nextImage">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                                
+                                <!-- Zoom Toggle -->
+                                <button class="zoom-toggle" id="zoomToggle">
+                                    <i class="fas fa-search-plus"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="thumbnail-images" id="thumbnailImages">
+                                <!-- Thumbnails will be loaded dynamically -->
+                            </div>
+                        </div>
+                        
+                        <!-- Product Info -->
+                        <div class="product-info">
+                            <div class="product-header">
+                                <div class="product-category" id="productCategory"></div>
+                                <h1 class="product-title" id="productTitle"></h1>
+                                
+                                <div class="product-rating">
+                                    <div class="stars" id="productStars"></div>
+                                    <span class="rating-text" id="ratingText"></span>
+                                    <a href="#reviews" class="reviews-link" id="reviewsLink"></a>
+                                </div>
+                                
+                                <div class="product-price">
+                                    <span class="current-price" id="currentPrice"></span>
+                                    <span class="original-price" id="originalPrice" style="display: none;"></span>
+                                    <span class="discount-badge" id="discountBadge" style="display: none;"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="product-description">
+                                <p id="productDescription"></p>
+                            </div>
+                            
+                            <!-- Product Options -->
+                            <div class="product-options">
+                                <!-- Size Selection -->
+                                <div class="option-group" id="sizeGroup" style="display: none;">
+                                    <label class="option-label" data-i18n="size">Taille :</label>
+                                    <div class="size-options" id="sizeOptions">
+                                        <!-- Size options will be loaded dynamically -->
+                                    </div>
+                                </div>
+                                
+                                <!-- Color Selection -->
+                                <div class="option-group" id="colorGroup" style="display: none;">
+                                    <label class="option-label" data-i18n="color">Couleur :</label>
+                                    <div class="color-options" id="colorOptions">
+                                        <!-- Color options will be loaded dynamically -->
+                                    </div>
+                                </div>
+                                
+                                <!-- Quantity Selection -->
+                                <div class="option-group">
+                                    <label class="option-label" for="quantity" data-i18n="quantity">Quantité :</label>
+                                    <div class="quantity-selector">
+                                        <button class="quantity-btn minus" id="quantityMinus">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <input type="number" id="quantity" value="1" min="1" max="10">
+                                        <button class="quantity-btn plus" id="quantityPlus">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Product Actions -->
+                            <div class="product-actions">
+                                <button class="btn-primary add-to-cart" id="addToCartBtn" data-i18n="addToCart">Ajouter au panier</button>
+                                <button class="btn-outline wishlist-btn" id="wishlistBtn" data-i18n="addToWishlist">Ajouter aux favoris</button>
+                                <button class="btn-outline share-btn" id="shareBtn" data-i18n="share">Partager</button>
+                            </div>
+                            
+                            <!-- Stock Status -->
+                            <div class="stock-status" id="stockStatus">
+                                <!-- Stock information will be loaded dynamically -->
+                            </div>
+                            
+                            <!-- Product Features -->
+                            <div class="product-features">
+                                <div class="feature">
+                                    <i class="fas fa-truck"></i>
+                                    <div>
+                                        <strong>Free Shipping</strong>
+                                        <span>On orders over $100</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="feature">
+                                    <i class="fas fa-undo"></i>
+                                    <div>
+                                        <strong>Easy Returns</strong>
+                                        <span>30-day return policy</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="feature">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <div>
+                                        <strong>Secure Payment</strong>
+                                        <span>SSL encrypted checkout</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Product Details Tabs -->
+        <section class="product-tabs" id="productTabs" style="display: none;">
+            <div class="container">
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-tab="description" data-i18n="description">Description</button>
+                    <button class="tab-btn" data-tab="specifications" data-i18n="specifications">Caractéristiques</button>
+                    <button class="tab-btn" data-tab="care" data-i18n="care">Entretien</button>
+                    <button class="tab-btn" data-tab="shipping" data-i18n="shippingReturns">Livraison & Retours</button>
+                </div>
+                
+                <div class="tabs-content">
+                    <div class="tab-panel active" id="descriptionTab">
+                        <div class="tab-content" id="detailedDescription">
+                            <!-- Detailed description will be loaded dynamically -->
+                        </div>
+                    </div>
+                    
+                    <div class="tab-panel" id="specificationsTab">
+                        <div class="tab-content">
+                            <table class="specifications-table" id="specificationsTable">
+                                <!-- Specifications will be loaded dynamically -->
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-panel" id="careTab">
+                        <div class="tab-content">
+                            <div class="care-instructions">
+                                <h3>Care Instructions</h3>
+                                <ul>
+                                    <li><i class="fas fa-hand-sparkles"></i> Hand wash in cold water</li>
+                                    <li><i class="fas fa-tint"></i> Use mild detergent</li>
+                                    <li><i class="fas fa-sun"></i> Air dry away from direct sunlight</li>
+                                    <li><i class="fas fa-iron"></i> Iron on low heat if needed</li>
+                                    <li><i class="fas fa-ban"></i> Do not bleach or dry clean</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-panel" id="shippingTab">
+                        <div class="tab-content">
+                            <div class="shipping-info">
+                                <h3>Shipping Information</h3>
+                                <ul>
+                                    <li><strong>Standard Shipping:</strong> 5-7 business days ($9.99)</li>
+                                    <li><strong>Express Shipping:</strong> 2-3 business days ($19.99)</li>
+                                    <li><strong>Free Shipping:</strong> On orders over $100</li>
+                                    <li><strong>International Shipping:</strong> Available to select countries</li>
+                                </ul>
+                                
+                                <h3>Return Policy</h3>
+                                <ul>
+                                    <li>30-day return window from delivery date</li>
+                                    <li>Items must be unworn and in original condition</li>
+                                    <li>Free returns for defective items</li>
+                                    <li>Return shipping costs apply for exchanges</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Reviews Section -->
+        <section class="reviews-section" id="reviewsSection" style="display: none;">
+            <div class="container">
+                <div class="reviews-header">
+                    <h2 id="reviewsTitle" data-i18n="customerReviews">Avis des clients</h2>
+                    
+                    <div class="reviews-summary">
+                        <div class="rating-overview">
+                            <div class="average-rating">
+                                <span class="rating-number" id="averageRating">0.0</span>
+                                <div class="rating-stars" id="averageStars"></div>
+                                <span class="total-reviews" id="totalReviews">0 reviews</span>
+                            </div>
+                            
+                            <div class="rating-breakdown" id="ratingBreakdown">
+                                <!-- Rating breakdown will be loaded dynamically -->
+                            </div>
+                        </div>
+                        
+                        <button class="btn-primary write-review" id="writeReviewBtn" data-i18n="writeReview">Rédiger un avis</button>
+                    </div>
+                </div>
+                
+                <div class="reviews-filters">
+                    <select id="reviewsSort">
+                        <option value="newest" data-i18n="newestFirst">Plus récents</option>
+                        <option value="oldest" data-i18n="oldestFirst">Plus anciens</option>
+                        <option value="highest" data-i18n="highestRated">Mieux notés</option>
+                        <option value="lowest" data-i18n="lowestRated">Moins bien notés</option>
+                        <option value="helpful" data-i18n="mostHelpful">Les plus utiles</option>
+                    </select>
+                    
+                    <div class="rating-filter">
+                        <label data-i18n="filterByRating">Filtrer par note :</label>
+                        <select id="ratingFilter">
+                            <option value="all" data-i18n="allRatings">Toutes les notes</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="reviews-list" id="reviewsList">
+                    <!-- Reviews will be loaded dynamically -->
+                </div>
+                
+                <div class="reviews-pagination" id="reviewsPagination">
+                    <!-- Pagination will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Related Products -->
+        <section class="related-products" id="relatedProducts" style="display: none;">
+            <div class="container">
+                <h2>You May Also Like</h2>
+                
+                <div class="products-grid" id="relatedProductsGrid">
+                    <!-- Related products will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Abaya Elegance</h3>
+                    <p>Discover the perfect blend of tradition and contemporary style with our exquisite collection of abayas.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html" data-i18n="home">Accueil</a></li>
+                        <li><a href="catalog.html" data-i18n="shop">Boutique</a></li>
+                        <li><a href="#about" data-i18n="aboutUs">À propos de nous</a></li>
+                        <li><a href="#contact" data-i18n="contact">Contact</a></li>
+                        <li><a href="#" data-i18n="sizeGuide">Guide des tailles</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#" data-i18n="shippingInfo">Informations de livraison</a></li>
+                        <li><a href="#" data-i18n="returns">Retours</a></li>
+                        <li><a href="#" data-i18n="faq">FAQ</a></li>
+                        <li><a href="#" data-i18n="trackOrder">Suivre la commande</a></li>
+                        <li><a href="#" data-i18n="support">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to receive updates on new arrivals and exclusive offers.</p>
+                    <form class="newsletter-form" id="footerNewsletterForm">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 Abaya Elegance. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Review Modal -->
+    <div class="modal" id="reviewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Write a Review</h3>
+                <button class="modal-close" id="reviewModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <form id="reviewForm">
+                    <div class="form-group">
+                        <label>Rating *</label>
+                        <div class="star-rating" id="starRating">
+                            <i class="far fa-star" data-rating="1"></i>
+                            <i class="far fa-star" data-rating="2"></i>
+                            <i class="far fa-star" data-rating="3"></i>
+                            <i class="far fa-star" data-rating="4"></i>
+                            <i class="far fa-star" data-rating="5"></i>
+                        </div>
+                        <input type="hidden" id="reviewRating" name="rating" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reviewTitle">Review Title *</label>
+                        <input type="text" id="reviewTitle" name="title" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reviewComment">Your Review *</label>
+                        <textarea id="reviewComment" name="comment" rows="5" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reviewerName">Your Name *</label>
+                        <input type="text" id="reviewerName" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reviewerEmail">Email (will not be published) *</label>
+                        <input type="email" id="reviewerEmail" name="email" required>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-outline" id="cancelReview">Cancel</button>
+                        <button type="submit" class="btn-primary">Submit Review</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Share Modal -->
+    <div class="modal" id="shareModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Share Product</h3>
+                <button class="modal-close" id="shareModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="share-options">
+                    <button class="share-btn facebook" data-platform="facebook">
+                        <i class="fab fa-facebook"></i>
+                        Facebook
+                    </button>
+                    
+                    <button class="share-btn twitter" data-platform="twitter">
+                        <i class="fab fa-twitter"></i>
+                        Twitter
+                    </button>
+                    
+                    <button class="share-btn pinterest" data-platform="pinterest">
+                        <i class="fab fa-pinterest"></i>
+                        Pinterest
+                    </button>
+                    
+                    <button class="share-btn whatsapp" data-platform="whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                        WhatsApp
+                    </button>
+                    
+                    <button class="share-btn email" data-platform="email" data-i18n="email">Email</button>
+                    <label for="shareLink" data-i18n="shareLink">Lien de partage :</label>
+                    <div class="share-link-row">
+                        <input type="text" id="shareLink" readonly>
+                        <button class="btn-outline" id="copyLink" data-i18n="copy">Copier</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/product.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

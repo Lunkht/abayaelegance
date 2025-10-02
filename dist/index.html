@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abaya Elegance - Premium Islamic Fashion</title>
+    <meta name="description" content="Discover our exquisite collection of traditional and modern abayas. Premium quality Islamic fashion for the modern woman.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-7h2-lO8u.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><i class="fas fa-moon"></i> Abaya Elegance</h1>
+                </div>
+                
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="#home" class="nav-link active">Home</a></li>
+                        <li><a href="catalog.html" class="nav-link">Catalog</a></li>
+                        <li><a href="about.html" class="nav-link">About</a></li>
+                        <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <button class="search-btn" id="searchBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <a href="cart.html" class="cart-btn">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                    <div class="auth-buttons">
+                        <a href="login.html" class="btn-secondary" id="loginBtn">Login</a>
+                        <a href="account.html" class="btn-primary" id="accountBtn" style="display: none;">Account</a>
+                    </div>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-container">
+            <input type="text" placeholder="Search for abayas..." class="search-input" id="searchInput">
+            <button class="search-close" id="searchClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="container">
+                <div class="hero-text">
+                    <h2 class="hero-title">Elegant Abayas for the Modern Woman</h2>
+                    <p class="hero-subtitle">Discover our exquisite collection of traditional and contemporary abayas, crafted with premium fabrics and attention to detail.</p>
+                    <div class="hero-buttons">
+                        <a href="catalog.html" class="btn-primary">Shop Collection</a>
+                        <a href="#featured" class="btn-secondary">View Featured</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://trae-api-sg.mchost.guru/api/ide/v1/text_to_image?prompt=elegant%20woman%20wearing%20beautiful%20black%20abaya%20in%20luxurious%20boutique%20setting%20with%20Islamic%20architectural%20elements&image_size=landscape_16_9" alt="Elegant Abaya Collection" loading="lazy">
+        </div>
+    </section>
+
+    <!-- Featured Collections -->
+    <section class="featured-collections" id="featured">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Collections</h2>
+                <p class="section-subtitle">Explore our carefully curated collections</p>
+            </div>
+            
+            <div class="collections-grid" id="collectionsGrid">
+                <!-- Collections will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- New Arrivals -->
+    <section class="new-arrivals">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">New Arrivals</h2>
+                <p class="section-subtitle">Latest additions to our collection</p>
+            </div>
+            
+            <div class="products-grid" id="newArrivalsGrid">
+                <!-- Products will be loaded dynamically -->
+            </div>
+            
+            <div class="section-footer">
+                <a href="catalog.html" class="btn-primary">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">About Abaya Elegance</h2>
+                    <p>We are dedicated to providing the finest quality abayas that blend traditional Islamic values with contemporary fashion. Our collection features carefully selected fabrics, exquisite craftsmanship, and designs that celebrate the beauty of modest fashion.</p>
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-star"></i>
+                            <h3>Premium Quality</h3>
+                            <p>Only the finest fabrics and materials</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-heart"></i>
+                            <h3>Modest Fashion</h3>
+                            <p>Designs that honor Islamic values</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-shipping-fast"></i>
+                            <h3>Fast Delivery</h3>
+                            <p>Quick and secure worldwide shipping</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://trae-api-sg.mchost.guru/api/ide/v1/text_to_image?prompt=elegant%20abaya%20boutique%20interior%20with%20Islamic%20geometric%20patterns%20and%20luxury%20display&image_size=square_hd" alt="Our Boutique" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Stay Updated</h2>
+                <p>Subscribe to our newsletter for the latest collections and exclusive offers</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" class="btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Abaya Elegance</h3>
+                    <p>Premium Islamic fashion for the modern woman. Quality, elegance, and modesty in every piece.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="catalog.html">Shop All</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">Care Instructions</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> info@abayaelegance.com</p>
+                        <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Fashion Street, City</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Abaya Elegance. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

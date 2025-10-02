@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - Abaya Elegance</title>
+    <meta name="description" content="Manage your Abaya Elegance account, view order history, update profile, and track your orders.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <h1>Abaya Elegance</h1>
+                    </a>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li class="dropdown">
+                            <a href="catalog.html" class="nav-link">Collections <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu" id="categoriesMenu">
+                                <!-- Categories will be loaded dynamically -->
+                            </ul>
+                        </li>
+                        <li><a href="catalog.html" class="nav-link">Shop</a></li>
+                        <li><a href="about.html" class="nav-link">About</a></li>
+                        <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <div class="language-selector">
+                        <select aria-label="Sélecteur de langue">
+                            <option value="fr">FR</option>
+                            <option value="en">EN</option>
+                        </select>
+                    </div>
+                    <button class="search-toggle" id="searchToggle">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    
+                    <div class="user-menu">
+                        <button class="user-toggle" id="userToggle">
+                            <i class="fas fa-user"></i>
+                        </button>
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="auth-links" id="authLinks">
+                                <a href="login.html">Sign In</a>
+                                <a href="register.html">Register</a>
+                            </div>
+                            <div class="user-links" id="userLinks" style="display: none;">
+                                <a href="account.html">My Account</a>
+                                <a href="account.html#orders">Orders</a>
+                                <a href="#" id="signOutBtn">Sign Out</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cart-icon">
+                        <a href="cart.html">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span class="cart-count" id="cartCount">0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <nav class="mobile-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="catalog.html">Shop All</a></li>
+                    <li class="mobile-dropdown">
+                        <button class="mobile-dropdown-toggle">Collections <i class="fas fa-chevron-down"></i></button>
+                        <ul class="mobile-dropdown-menu" id="mobileCategoriesMenu">
+                            <!-- Categories will be loaded dynamically -->
+                        </ul>
+                    </li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="mobile-menu-actions">
+                <div class="mobile-auth" id="mobileAuth">
+                    <a href="login.html" class="btn-outline">Sign In</a>
+                    <a href="register.html" class="btn-primary">Register</a>
+                </div>
+                <div class="mobile-user" id="mobileUser" style="display: none;">
+                    <a href="account.html">My Account</a>
+                    <a href="#" id="mobileSignOutBtn">Sign Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" placeholder="Search for abayas..." id="searchInput">
+                <button class="search-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <button class="search-close" id="searchClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Account Section -->
+        <section class="account-section">
+            <div class="container">
+                <!-- Account Header -->
+                <div class="account-header">
+                    <h1>My Account</h1>
+                    <p>Welcome back! Manage your account and track your orders.</p>
+                </div>
+                
+                <!-- Account Content -->
+                <div class="account-content">
+                    <!-- Account Sidebar -->
+                    <div class="account-sidebar">
+                        <div class="account-nav">
+                            <button class="nav-item active" data-tab="dashboard">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Dashboard</span>
+                            </button>
+                            
+                            <button class="nav-item" data-tab="orders">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span>Orders</span>
+                            </button>
+                            
+                            <button class="nav-item" data-tab="profile">
+                                <i class="fas fa-user"></i>
+                                <span>Profile</span>
+                            </button>
+                            
+                            <button class="nav-item" data-tab="addresses">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Addresses</span>
+                            </button>
+                            
+                            <button class="nav-item" data-tab="wishlist">
+                                <i class="fas fa-heart"></i>
+                                <span>Wishlist</span>
+                            </button>
+                            
+                            <button class="nav-item" data-tab="security">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Security</span>
+                            </button>
+                            
+                            <button class="nav-item sign-out" id="sidebarSignOut">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Sign Out</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Account Main -->
+                    <div class="account-main">
+                        <!-- Dashboard Tab -->
+                        <div class="tab-content active" id="dashboardTab">
+                            <div class="dashboard-header">
+                                <h2>Dashboard</h2>
+                                <p>Overview of your account activity</p>
+                            </div>
+                            
+                            <!-- Account Stats -->
+                            <div class="account-stats">
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-shopping-bag"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <h3 id="totalOrders">0</h3>
+                                        <p>Total Orders</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-dollar-sign"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <h3 id="totalSpent">$0.00</h3>
+                                        <p>Total Spent</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-heart"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <h3 id="wishlistCount">0</h3>
+                                        <p>Wishlist Items</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <h3 id="loyaltyPoints">0</h3>
+                                        <p>Loyalty Points</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Recent Orders -->
+                            <div class="recent-orders">
+                                <div class="section-header">
+                                    <h3>Recent Orders</h3>
+                                    <a href="#" class="view-all" data-tab-link="orders">View All</a>
+                                </div>
+                                
+                                <div class="orders-list" id="recentOrdersList">
+                                    <!-- Recent orders will be populated here -->
+                                </div>
+                            </div>
+                            
+                            <!-- Quick Actions -->
+                            <div class="quick-actions">
+                                <h3>Quick Actions</h3>
+                                
+                                <div class="action-grid">
+                                    <a href="catalog.html" class="action-card">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <span>Continue Shopping</span>
+                                    </a>
+                                    
+                                    <button class="action-card" data-tab-link="wishlist">
+                                        <i class="fas fa-heart"></i>
+                                        <span>View Wishlist</span>
+                                    </button>
+                                    
+                                    <button class="action-card" data-tab-link="profile">
+                                        <i class="fas fa-user-edit"></i>
+                                        <span>Edit Profile</span>
+                                    </button>
+                                    
+                                    <button class="action-card" data-tab-link="addresses">
+                                        <i class="fas fa-plus"></i>
+                                        <span>Add Address</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Orders Tab -->
+                        <div class="tab-content" id="ordersTab">
+                            <div class="tab-header">
+                                <h2>Order History</h2>
+                                <p>Track and manage your orders</p>
+                            </div>
+                            
+                            <!-- Order Filters -->
+                            <div class="order-filters">
+                                <select id="orderStatusFilter">
+                                    <option value="">All Orders</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="processing">Processing</option>
+                                    <option value="shipped">Shipped</option>
+                                    <option value="delivered">Delivered</option>
+                                    <option value="cancelled">Cancelled</option>
+                                </select>
+                                
+                                <input type="date" id="orderDateFrom" placeholder="From Date">
+                                <input type="date" id="orderDateTo" placeholder="To Date">
+                                
+                                <button class="btn btn-outline" id="filterOrders">Filter</button>
+                                <button class="btn btn-text" id="clearFilters">Clear</button>
+                            </div>
+                            
+                            <!-- Orders List -->
+                            <div class="orders-container" id="ordersContainer">
+                                <!-- Orders will be populated here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Profile Tab -->
+                        <div class="tab-content" id="profileTab">
+                            <div class="tab-header">
+                                <h2>Profile Information</h2>
+                                <p>Update your personal information</p>
+                            </div>
+                            
+                            <!-- Profile Form -->
+                            <form class="profile-form" id="profileForm">
+                                <div class="form-section">
+                                    <h3>Personal Information</h3>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="profileFirstName">First Name</label>
+                                            <input type="text" id="profileFirstName" name="firstName" required>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="profileLastName">Last Name</label>
+                                            <input type="text" id="profileLastName" name="lastName" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="profileEmail">Email Address</label>
+                                        <input type="email" id="profileEmail" name="email" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="profilePhone">Phone Number</label>
+                                        <input type="tel" id="profilePhone" name="phone">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="profileDateOfBirth">Date of Birth</label>
+                                        <input type="date" id="profileDateOfBirth" name="dateOfBirth">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-section">
+                                    <h3>Preferences</h3>
+                                    
+                                    <div class="form-group">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" id="emailNotifications" name="emailNotifications">
+                                            <span class="checkmark"></span>
+                                            Receive email notifications about orders and promotions
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" id="smsNotifications" name="smsNotifications">
+                                            <span class="checkmark"></span>
+                                            Receive SMS notifications about order updates
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" id="newsletter" name="newsletter">
+                                            <span class="checkmark"></span>
+                                            Subscribe to our newsletter for exclusive offers
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                                    <button type="button" class="btn btn-outline" id="cancelProfileEdit">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Addresses Tab -->
+                        <div class="tab-content" id="addressesTab">
+                            <div class="tab-header">
+                                <h2>Saved Addresses</h2>
+                                <p>Manage your shipping and billing addresses</p>
+                                <button class="btn btn-primary" id="addAddressBtn">Add New Address</button>
+                            </div>
+                            
+                            <!-- Addresses List -->
+                            <div class="addresses-container" id="addressesContainer">
+                                <!-- Addresses will be populated here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Wishlist Tab -->
+                        <div class="tab-content" id="wishlistTab">
+                            <div class="tab-header">
+                                <h2>My Wishlist</h2>
+                                <p>Items you've saved for later</p>
+                            </div>
+                            
+                            <!-- Wishlist Grid -->
+                            <div class="wishlist-grid" id="wishlistGrid">
+                                <!-- Wishlist items will be populated here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Security Tab -->
+                        <div class="tab-content" id="securityTab">
+                            <div class="tab-header">
+                                <h2>Security Settings</h2>
+                                <p>Manage your password and account security</p>
+                            </div>
+                            
+                            <!-- Change Password Form -->
+                            <form class="security-form" id="changePasswordForm">
+                                <div class="form-section">
+                                    <h3>Change Password</h3>
+                                    
+                                    <div class="form-group">
+                                        <label for="currentPassword">Current Password</label>
+                                        <div class="password-input">
+                                            <input type="password" id="currentPassword" name="currentPassword" required>
+                                            <button type="button" class="password-toggle">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="newPassword">New Password</label>
+                                        <div class="password-input">
+                                            <input type="password" id="newPassword" name="newPassword" required>
+                                            <button type="button" class="password-toggle">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="confirmNewPassword">Confirm New Password</label>
+                                        <div class="password-input">
+                                            <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
+                                            <button type="button" class="password-toggle">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary">Update Password</button>
+                                    </div>
+                                </div>
+                            </form>
+                            
+                            <!-- Account Actions -->
+                            <div class="form-section">
+                                <h3>Account Actions</h3>
+                                
+                                <div class="danger-zone">
+                                    <div class="danger-item">
+                                        <div class="danger-content">
+                                            <h4>Delete Account</h4>
+                                            <p>Permanently delete your account and all associated data. This action cannot be undone.</p>
+                                        </div>
+                                        <button class="btn btn-danger" id="deleteAccountBtn">Delete Account</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Abaya Elegance</h3>
+                    <p>Discover the perfect blend of tradition and contemporary style with our exquisite collection of abayas.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="catalog.html">Shop</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Track Order</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to receive updates on new arrivals and exclusive offers.</p>
+                    <form class="newsletter-form" id="footerNewsletterForm">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 Abaya Elegance. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+    
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/account.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Abaya Elegance</title>
+    <meta name="description" content="Review your selected abayas and proceed to checkout. Secure shopping cart with easy quantity adjustments.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <h1>Abaya Elegance</h1>
+                    </a>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li class="dropdown">
+                            <a href="catalog.html" class="nav-link">Collections <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu" id="categoriesMenu">
+                                <!-- Categories will be loaded dynamically -->
+                            </ul>
+                        </li>
+                        <li><a href="catalog.html" class="nav-link">Shop</a></li>
+                        <li><a href="about.html" class="nav-link">About</a></li>
+                        <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <div class="language-selector">
+                        <select aria-label="Sélecteur de langue">
+                            <option value="fr">FR</option>
+                            <option value="en">EN</option>
+                        </select>
+                    </div>
+                    <button class="search-toggle" id="searchToggle">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    
+                    <div class="user-menu">
+                        <button class="user-toggle" id="userToggle">
+                            <i class="fas fa-user"></i>
+                        </button>
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="auth-links" id="authLinks">
+                                <a href="login.html">Sign In</a>
+                                <a href="register.html">Register</a>
+                            </div>
+                            <div class="user-links" id="userLinks" style="display: none;">
+                                <a href="account.html">My Account</a>
+                                <a href="account.html#orders">Orders</a>
+                                <a href="#" id="signOutBtn">Sign Out</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cart-icon">
+                        <a href="cart.html">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span class="cart-count" id="cartCount">0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <nav class="mobile-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="catalog.html">Shop All</a></li>
+                    <li class="mobile-dropdown">
+                        <button class="mobile-dropdown-toggle">Collections <i class="fas fa-chevron-down"></i></button>
+                        <ul class="mobile-dropdown-menu" id="mobileCategoriesMenu">
+                            <!-- Categories will be loaded dynamically -->
+                        </ul>
+                    </li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="mobile-menu-actions">
+                <div class="mobile-auth" id="mobileAuth">
+                    <a href="login.html" class="btn-outline">Sign In</a>
+                    <a href="register.html" class="btn-primary">Register</a>
+                </div>
+                <div class="mobile-user" id="mobileUser" style="display: none;">
+                    <a href="account.html">My Account</a>
+                    <a href="#" id="mobileSignOutBtn">Sign Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" placeholder="Search for abayas..." id="searchInput">
+                <button class="search-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <button class="search-close" id="searchClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Breadcrumb -->
+        <section class="breadcrumb">
+            <div class="container">
+                <nav class="breadcrumb-nav">
+                    <a href="index.html">Home</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span class="breadcrumb-current">Shopping Cart</span>
+                </nav>
+            </div>
+        </section>
+        
+        <!-- Cart Section -->
+        <section class="cart-section">
+            <div class="container">
+                <div class="cart-header">
+                    <h1>Shopping Cart</h1>
+                    <p class="cart-subtitle">Review your selected items before checkout</p>
+                </div>
+                
+                <!-- Loading State -->
+                <div class="loading-state" id="loadingState">
+                    <div class="loading-spinner"></div>
+                    <p>Loading your cart...</p>
+                </div>
+                
+                <!-- Empty Cart State -->
+                <div class="empty-cart" id="emptyCart" style="display: none;">
+                    <div class="empty-cart-content">
+                        <i class="fas fa-shopping-bag empty-cart-icon"></i>
+                        <h2>Your cart is empty</h2>
+                        <p>Looks like you haven't added any items to your cart yet.</p>
+                        <a href="catalog.html" class="btn btn-primary">
+                            <i class="fas fa-arrow-left"></i>
+                            Continue Shopping
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Cart Content -->
+                <div class="cart-content" id="cartContent" style="display: none;">
+                    <div class="cart-layout">
+                        <!-- Cart Items -->
+                        <div class="cart-items">
+                            <div class="cart-items-header">
+                                <h2>Items in your cart (<span id="itemCount">0</span>)</h2>
+                                <button class="clear-cart-btn" id="clearCartBtn">
+                                    <i class="fas fa-trash"></i>
+                                    Clear Cart
+                                </button>
+                            </div>
+                            
+                            <div class="cart-items-list" id="cartItemsList">
+                                <!-- Cart items will be populated here -->
+                            </div>
+                            
+                            <!-- Continue Shopping -->
+                            <div class="continue-shopping">
+                                <a href="catalog.html" class="btn btn-outline">
+                                    <i class="fas fa-arrow-left"></i>
+                                    Continue Shopping
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Cart Summary -->
+                        <div class="cart-summary">
+                            <div class="summary-card">
+                                <h3>Order Summary</h3>
+                                
+                                <div class="summary-row">
+                                    <span>Subtotal:</span>
+                                    <span id="subtotal">$0.00</span>
+                                </div>
+                                
+                                <div class="summary-row">
+                                    <span>Shipping:</span>
+                                    <span id="shipping">Free</span>
+                                </div>
+                                
+                                <div class="summary-row">
+                                    <span>Tax:</span>
+                                    <span id="tax">$0.00</span>
+                                </div>
+                                
+                                <div class="summary-divider"></div>
+                                
+                                <div class="summary-row summary-total">
+                                    <span>Total:</span>
+                                    <span id="total">$0.00</span>
+                                </div>
+                                
+                                <!-- Promo Code -->
+                                <div class="promo-code">
+                                    <h4>Promo Code</h4>
+                                    <div class="promo-input-group">
+                                        <input type="text" id="promoCode" placeholder="Enter promo code">
+                                        <button class="apply-promo-btn" id="applyPromoBtn">
+                                            Apply
+                                        </button>
+                                    </div>
+                                    <div class="promo-message" id="promoMessage"></div>
+                                </div>
+                                
+                                <!-- Checkout Button -->
+                                <button class="btn btn-primary btn-full checkout-btn" id="checkoutBtn">
+                                    <i class="fas fa-lock"></i>
+                                    Proceed to Checkout
+                                </button>
+                                
+                                <!-- Security Info -->
+                                <div class="security-info">
+                                    <div class="security-item">
+                                        <i class="fas fa-shield-alt"></i>
+                                        <span>Secure checkout</span>
+                                    </div>
+                                    <div class="security-item">
+                                        <i class="fas fa-truck"></i>
+                                        <span>Free shipping over $100</span>
+                                    </div>
+                                    <div class="security-item">
+                                        <i class="fas fa-undo"></i>
+                                        <span>30-day returns</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recommended Products -->
+                <div class="recommended-products" id="recommendedProducts" style="display: none;">
+                    <h2>You might also like</h2>
+                    <div class="products-grid" id="recommendedGrid">
+                        <!-- Recommended products will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Abaya Elegance</h3>
+                    <p>Discover the perfect blend of tradition and contemporary style with our exquisite collection of abayas.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="catalog.html">Shop</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Track Order</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to receive updates on new arrivals and exclusive offers.</p>
+                    <form class="newsletter-form" id="footerNewsletterForm">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 Abaya Elegance. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="confirmTitle">Confirm Action</h3>
+                <button class="modal-close" id="confirmModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <p id="confirmMessage">Are you sure you want to perform this action?</p>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="confirmCancel">Cancel</button>
+                <button class="btn btn-primary" id="confirmOk">Confirm</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+    
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Catalog - Abaya Elegance</title>
+    <meta name="description" content="Browse our beautiful collection of abayas with various styles, colors, and sizes. Find the perfect abaya for any occasion.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <h1>Abaya Elegance</h1>
+                    </a>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link" data-i18n="home">Accueil</a></li>
+                        <li class="dropdown">
+                            <a href="catalog.html" class="nav-link" data-i18n="categories">Catégories <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu" id="categoriesMenu">
+                                <!-- Categories will be loaded dynamically -->
+                            </ul>
+                        </li>
+                        <li><a href="catalog.html" class="nav-link" data-i18n="shop">Boutique</a></li>
+                        <li><a href="about.html" class="nav-link" data-i18n="about">À propos</a></li>
+                        <li><a href="contact.html" class="nav-link" data-i18n="contact">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <div class="language-selector">
+                        <select aria-label="Sélecteur de langue">
+                            <option value="fr">FR</option>
+                            <option value="en">EN</option>
+                        </select>
+                    </div>
+                    <button class="search-toggle" id="searchToggle">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    
+                    <div class="user-menu">
+                        <button class="user-toggle" id="userToggle">
+                            <i class="fas fa-user"></i>
+                        </button>
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="auth-links" id="authLinks">
+                                <a href="login.html">Sign In</a>
+                                <a href="register.html">Register</a>
+                            </div>
+                            <div class="user-links" id="userLinks" style="display: none;">
+                                <a href="account.html">My Account</a>
+                                <a href="account.html#orders">Orders</a>
+                                <a href="#" id="signOutBtn">Sign Out</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cart-icon">
+                        <a href="cart.html">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span class="cart-count" id="cartCount">0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <nav class="mobile-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="catalog.html">Shop All</a></li>
+                    <li class="mobile-dropdown">
+                        <button class="mobile-dropdown-toggle">Collections <i class="fas fa-chevron-down"></i></button>
+                        <ul class="mobile-dropdown-menu" id="mobileCategoriesMenu">
+                            <!-- Categories will be loaded dynamically -->
+                        </ul>
+                    </li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="mobile-menu-actions">
+                <div class="mobile-auth" id="mobileAuth">
+                    <a href="login.html" class="btn-outline">Sign In</a>
+                    <a href="register.html" class="btn-primary">Register</a>
+                </div>
+                <div class="mobile-user" id="mobileUser" style="display: none;">
+                    <a href="account.html">My Account</a>
+                    <a href="#" id="mobileSignOutBtn">Sign Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" placeholder="Search for abayas..." id="searchInput">
+                <button class="search-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <button class="search-close" id="searchClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <div class="page-header-content">
+                    <h1 class="page-title" data-i18n="productCatalog">Catalogue des produits</h1>
+                    <nav class="breadcrumb">
+                        <a href="index.html" data-i18n="home">Accueil</a>
+                        <span class="breadcrumb-separator">/</span>
+                        <span class="breadcrumb-current" data-i18n="catalog">Catalogue</span>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <!-- Catalog Section -->
+        <section class="catalog-section">
+            <div class="container">
+                <div class="catalog-layout">
+                    <!-- Sidebar Filters -->
+                    <aside class="catalog-sidebar">
+                        <div class="filters">
+                            <div class="filters-header">
+                                <h3 data-i18n="filters">Filtres</h3>
+                                <button class="filters-clear" id="clearFilters" data-i18n="clearAll">Tout effacer</button>
+                            </div>
+                            
+                            <!-- Category Filter -->
+                            <div class="filter-group">
+                                <h4 class="filter-title" data-i18n="categories">Catégories</h4>
+                                <div class="filter-options" id="categoryFilters">
+                                    <!-- Categories will be loaded dynamically -->
+                                </div>
+                            </div>
+                            
+                            <!-- Price Filter -->
+                            <div class="filter-group">
+                                <h4 class="filter-title" data-i18n="priceRange">Plage de prix</h4>
+                                <div class="price-filter">
+                                    <div class="price-inputs">
+                                        <input type="number" placeholder="Min" id="minPrice" min="0">
+                                        <span>-</span>
+                                        <input type="number" placeholder="Max" id="maxPrice" min="0">
+                                    </div>
+                                    <button class="btn-secondary apply-price" id="applyPrice" data-i18n="apply">Appliquer</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Size Filter -->
+                            <div class="filter-group">
+                                <h4 class="filter-title" data-i18n="sizes">Tailles</h4>
+                                <div class="filter-options" id="sizeFilters">
+                                    <!-- Sizes will be loaded dynamically -->
+                                </div>
+                            </div>
+                            
+                            <!-- Color Filter -->
+                            <div class="filter-group">
+                                <h4 class="filter-title" data-i18n="colors">Couleurs</h4>
+                                <div class="color-filters" id="colorFilters">
+                                    <!-- Colors will be loaded dynamically -->
+                                </div>
+                            </div>
+                            
+                            <!-- Availability Filter -->
+                            <div class="filter-group">
+                                <h4 class="filter-title" data-i18n="availability">Disponibilité</h4>
+                                <div class="filter-options">
+                                    <label class="filter-option">
+                                        <input type="checkbox" name="availability" value="in_stock">
+                                        <span class="checkmark"></span>
+                                        <span data-i18n="inStock">En stock</span>
+                                    </label>
+                                    <label class="filter-option">
+                                        <input type="checkbox" name="availability" value="on_sale">
+                                        <span class="checkmark"></span>
+                                        <span data-i18n="onSale">En promotion</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                    
+                    <!-- Main Content -->
+                    <div class="catalog-main">
+                        <!-- Toolbar -->
+                        <div class="catalog-toolbar">
+                            <div class="toolbar-left">
+                                <button class="mobile-filters-toggle" id="mobileFiltersToggle">
+                                    <i class="fas fa-filter"></i>
+                                    Filters
+                                </button>
+                                
+                                <div class="results-count" id="resultsCount">
+                                    <!-- Results count will be updated dynamically -->
+                                </div>
+                            </div>
+                            
+                            <div class="toolbar-right">
+                                <div class="view-toggle">
+                                    <button class="view-btn grid-view active" data-view="grid">
+                                        <i class="fas fa-th"></i>
+                                    </button>
+                                    <button class="view-btn list-view" data-view="list">
+                                        <i class="fas fa-list"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="sort-dropdown">
+                                    <select id="sortSelect">
+                                        <option value="name_asc">Name (A-Z)</option>
+                                        <option value="name_desc">Name (Z-A)</option>
+                                        <option value="price_asc">Price (Low to High)</option>
+                                        <option value="price_desc">Price (High to Low)</option>
+                                        <option value="created_at_desc">Newest First</option>
+                                        <option value="created_at_asc">Oldest First</option>
+                                        <option value="rating_desc">Highest Rated</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Active Filters -->
+                        <div class="active-filters" id="activeFilters" style="display: none;">
+                            <!-- Active filters will be displayed here -->
+                        </div>
+                        
+                        <!-- Products Grid -->
+                        <div class="products-grid" id="productsGrid">
+                            <!-- Products will be loaded dynamically -->
+                        </div>
+                        
+                        <!-- Loading State -->
+                        <div class="loading-state" id="loadingState" style="display: none;">
+                            <div class="loading-spinner"></div>
+                            <p>Loading products...</p>
+                        </div>
+                        
+                        <!-- Empty State -->
+                        <div class="empty-state" id="emptyState" style="display: none;">
+                            <i class="fas fa-search"></i>
+                            <h3>No products found</h3>
+                            <p>Try adjusting your filters or search terms</p>
+                            <button class="btn-primary" id="clearAllFilters">Clear All Filters</button>
+                        </div>
+                        
+                        <!-- Pagination -->
+                        <div class="pagination" id="pagination">
+                            <!-- Pagination will be generated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Abaya Elegance</h3>
+                    <p>Discover the perfect blend of tradition and contemporary style with our exquisite collection of abayas.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="catalog.html">Shop</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Track Order</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to receive updates on new arrivals and exclusive offers.</p>
+                    <form class="newsletter-form" id="footerNewsletterForm">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 Abaya Elegance. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Filters Overlay -->
+    <div class="mobile-filters-overlay" id="mobileFiltersOverlay">
+        <div class="mobile-filters-content">
+            <div class="mobile-filters-header">
+                <h3>Filters</h3>
+                <button class="mobile-filters-close" id="mobileFiltersClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="mobile-filters-body">
+                <!-- Filters content will be cloned here for mobile -->
+            </div>
+            
+            <div class="mobile-filters-footer">
+                <button class="btn-secondary" id="mobileFiltersClear">Clear All</button>
+                <button class="btn-primary" id="mobileFiltersApply">Apply Filters</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/catalog.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

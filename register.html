@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Abaya Elegance</title>
+    <meta name="description" content="Create your Abaya Elegance account to enjoy exclusive offers, faster checkout, and personalized shopping experience.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <h1>Abaya Elegance</h1>
+                    </a>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li class="dropdown">
+                            <a href="catalog.html" class="nav-link">Collections <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu" id="categoriesMenu">
+                                <!-- Categories will be loaded dynamically -->
+                            </ul>
+                        </li>
+                        <li><a href="catalog.html" class="nav-link">Shop</a></li>
+                        <li><a href="about.html" class="nav-link">About</a></li>
+                        <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <div class="language-selector">
+                        <select aria-label="Sélecteur de langue">
+                            <option value="fr">FR</option>
+                            <option value="en">EN</option>
+                        </select>
+                    </div>
+                    <button class="search-toggle" id="searchToggle">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    
+                    <div class="user-menu">
+                        <button class="user-toggle" id="userToggle">
+                            <i class="fas fa-user"></i>
+                        </button>
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="auth-links" id="authLinks">
+                                <a href="login.html">Sign In</a>
+                                <a href="register.html">Register</a>
+                            </div>
+                            <div class="user-links" id="userLinks" style="display: none;">
+                                <a href="account.html">My Account</a>
+                                <a href="account.html#orders">Orders</a>
+                                <a href="#" id="signOutBtn">Sign Out</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cart-icon">
+                        <a href="cart.html">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span class="cart-count" id="cartCount">0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <nav class="mobile-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="catalog.html">Shop All</a></li>
+                    <li class="mobile-dropdown">
+                        <button class="mobile-dropdown-toggle">Collections <i class="fas fa-chevron-down"></i></button>
+                        <ul class="mobile-dropdown-menu" id="mobileCategoriesMenu">
+                            <!-- Categories will be loaded dynamically -->
+                        </ul>
+                    </li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="mobile-menu-actions">
+                <div class="mobile-auth" id="mobileAuth">
+                    <a href="login.html" class="btn-outline">Sign In</a>
+                    <a href="register.html" class="btn-primary">Register</a>
+                </div>
+                <div class="mobile-user" id="mobileUser" style="display: none;">
+                    <a href="account.html">My Account</a>
+                    <a href="#" id="mobileSignOutBtn">Sign Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" placeholder="Search for abayas..." id="searchInput">
+                <button class="search-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <button class="search-close" id="searchClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Auth Section -->
+        <section class="auth-section">
+            <div class="container">
+                <div class="auth-container">
+                    <div class="auth-card">
+                        <!-- Auth Header -->
+                        <div class="auth-header">
+                            <h1>Create Account</h1>
+                            <p>Join our community and discover the beauty of modest fashion</p>
+                        </div>
+                        
+                        <!-- Social Login -->
+                        <div class="social-login">
+                            <button class="social-btn google-btn" id="googleSignUp">
+                                <i class="fab fa-google"></i>
+                                <span>Sign up with Google</span>
+                            </button>
+                            
+                            <button class="social-btn facebook-btn" id="facebookSignUp">
+                                <i class="fab fa-facebook-f"></i>
+                                <span>Sign up with Facebook</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Divider -->
+                        <div class="auth-divider">
+                            <span>or</span>
+                        </div>
+                        
+                        <!-- Register Form -->
+                        <form class="auth-form" id="registerForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" id="firstName" name="firstName" required autocomplete="given-name">
+                                    <div class="form-error" id="firstNameError"></div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" id="lastName" name="lastName" required autocomplete="family-name">
+                                    <div class="form-error" id="lastNameError"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required autocomplete="email">
+                                <div class="form-error" id="emailError"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone Number (Optional)</label>
+                                <input type="tel" id="phone" name="phone" autocomplete="tel">
+                                <div class="form-error" id="phoneError"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <div class="password-input">
+                                    <input type="password" id="password" name="password" required autocomplete="new-password">
+                                    <button type="button" class="password-toggle" id="passwordToggle">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="password-requirements">
+                                    <p>Password must contain:</p>
+                                    <ul>
+                                        <li id="lengthReq" class="requirement">At least 8 characters</li>
+                                        <li id="uppercaseReq" class="requirement">One uppercase letter</li>
+                                        <li id="lowercaseReq" class="requirement">One lowercase letter</li>
+                                        <li id="numberReq" class="requirement">One number</li>
+                                    </ul>
+                                </div>
+                                <div class="form-error" id="passwordError"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm Password</label>
+                                <div class="password-input">
+                                    <input type="password" id="confirmPassword" name="confirmPassword" required autocomplete="new-password">
+                                    <button type="button" class="password-toggle" id="confirmPasswordToggle">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="form-error" id="confirmPasswordError"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="dateOfBirth">Date of Birth (Optional)</label>
+                                <input type="date" id="dateOfBirth" name="dateOfBirth" autocomplete="bday">
+                                <div class="form-error" id="dateOfBirthError"></div>
+                            </div>
+                            
+                            <div class="form-options">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                                    <span class="checkmark"></span>
+                                    I agree to the <a href="#" target="_blank">Terms of Service</a> and <a href="#" target="_blank">Privacy Policy</a>
+                                </label>
+                                
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="subscribeNewsletter" name="subscribeNewsletter">
+                                    <span class="checkmark"></span>
+                                    Subscribe to our newsletter for exclusive offers and updates
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-full" id="signUpBtn">
+                                <span class="btn-text">Create Account</span>
+                                <span class="btn-loading" style="display: none;">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    Creating account...
+                                </span>
+                            </button>
+                            
+                            <div class="form-error" id="formError"></div>
+                        </form>
+                        
+                        <!-- Auth Footer -->
+                        <div class="auth-footer">
+                            <p>Already have an account? <a href="login.html">Sign in</a></p>
+                        </div>
+                    </div>
+                    
+                    <!-- Auth Benefits -->
+                    <div class="auth-benefits">
+                        <h3>Join our community</h3>
+                        
+                        <div class="benefit-list">
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-gift"></i>
+                                </div>
+                                <div class="benefit-content">
+                                    <h4>Welcome Offer</h4>
+                                    <p>Get 15% off your first order when you create an account</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                                <div class="benefit-content">
+                                    <h4>VIP Access</h4>
+                                    <p>Be the first to know about new collections and exclusive sales</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="benefit-content">
+                                    <h4>Loyalty Rewards</h4>
+                                    <p>Earn points with every purchase and unlock special rewards</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="benefit-content">
+                                    <h4>Community</h4>
+                                    <p>Join thousands of women who love modest fashion</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="benefit-content">
+                                    <h4>Secure Shopping</h4>
+                                    <p>Your personal information is protected with industry-standard security</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Abaya Elegance</h3>
+                    <p>Discover the perfect blend of tradition and contemporary style with our exquisite collection of abayas.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="catalog.html">Shop</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Track Order</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to receive updates on new arrivals and exclusive offers.</p>
+                    <form class="newsletter-form" id="footerNewsletterForm">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 Abaya Elegance. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+    
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
