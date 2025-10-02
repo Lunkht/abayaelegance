@@ -1,0 +1,50 @@
+# Nom du workflow qui apparaîtra dans l'onglet "Actions" de GitHub
+name: Deploy to Hostinger
+
+# Déclenchement du workflow
+on:
+  # Se déclenche à chaque push sur la branche 'main'
+  push:
+    branches:
+      - main # Remplacez par 'master' si c'est votre branche principale
+
+jobs:
+  build-and-deploy:
+    # Le type de machine virtuelle sur laquelle exécuter le job
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Récupère le code de votre dépôt
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Configure l'environnement Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Utilisez une version de Node.js compatible avec votre projet
+          cache: 'npm' # Met en cache les dépendances pour accélérer les builds futurs
+
+      # 3. Installe les dépendances du projet
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Compile le projet pour la production
+      # Cette étape crée le dossier `dist` avec les fichiers optimisés.
+      - name: Build project
+        run: npm run build
+        env:
+          # Injection des variables d'environnement de production
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_STRIPE_PUBLIC_KEY: ${{ secrets.VITE_STRIPE_PUBLIC_KEY }}
+
+      # 5. Déploie les fichiers sur Hostinger via FTP
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/
+          server-dir: ./public_html/
+          delete: true # Supprime les anciens fichiers sur le serveur
