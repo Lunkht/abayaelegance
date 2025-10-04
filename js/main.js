@@ -12,6 +12,10 @@ class App {
   }
 
   async init() {
+    // Show loader at the very beginning
+    const pageLoader = document.getElementById('pageLoader');
+    document.body.classList.add('loading');
+
     try {
       // Initialize core modules
       await this.initializeModules();
@@ -485,7 +489,7 @@ class App {
   setupMobileMenu() {
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
-    const mobileMenuClose = document.getElementById('mobileMenuClose');
+    const mobileMenuClose = document.querySelector('.mobile-menu-close');
     
     if (!mobileMenuToggle || !mobileMenu) return;
 
