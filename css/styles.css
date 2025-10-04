@@ -2604,3 +2604,14 @@ textarea, select {
     align-items: flex-start;
   }
 }
+
+/* Responsive: Header & Navigation for Tablets/Mobiles */
+@media (max-width: 992px) {
+  .nav {
+    display: none; /* Hide desktop navigation */
+  }
+
+  .mobile-menu-toggle {
+    display: block; /* Show mobile menu (hamburger) icon */
+  }
+}
