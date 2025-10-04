@@ -37,7 +37,10 @@
                     <li class="dropdown">
                         <a href="catalog.html" class="nav-link" data-i18n="categories">Catégories <i class="fas fa-chevron-down"></i></a>
                         <ul class="dropdown-menu" id="categoriesMenu">
-                            <!-- Categories will be loaded dynamically -->
+                            <li><a href="catalog.html?category=classic">Abayas Classiques</a></li>
+                            <li><a href="catalog.html?category=modern">Abayas Modernes</a></li>
+                            <li><a href="catalog.html?category=luxury">Abayas de Luxe</a></li>
+                            <li><a href="catalog.html?category=casual">Abayas Décontractées</a></li>
                         </ul>
                     </li>
                     <li><a href="catalog.html" class="nav-link" data-i18n="shop">Boutique</a></li>
@@ -96,7 +99,10 @@
                     <li class="mobile-dropdown">
                         <button class="mobile-dropdown-toggle">Collections <i class="fas fa-chevron-down"></i></button>
                         <ul class="mobile-dropdown-menu" id="mobileCategoriesMenu">
-                            <!-- Categories will be loaded dynamically -->
+                            <li><a href="catalog.html?category=classic">Abayas Classiques</a></li>
+                            <li><a href="catalog.html?category=modern">Abayas Modernes</a></li>
+                            <li><a href="catalog.html?category=luxury">Abayas de Luxe</a></li>
+                            <li><a href="catalog.html?category=casual">Abayas Décontractées</a></li>
                         </ul>
                     </li>
                     <li><a href="about.html">About</a></li>
@@ -160,7 +166,28 @@
             </div>
             
             <div class="collections-grid" id="collectionsGrid">
-                <!-- Collections will be loaded dynamically -->
+                <div class="collection-card">
+                    <a href="catalog.html?collection=classic-elegance">
+                        <div class="collection-image">
+                            <img src="https://images.pexels.com/photos/432059/pexels-photo-432059.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Classic Elegance Collection">
+                        </div>
+                        <div class="collection-info">
+                            <h3>Classic Elegance</h3>
+                            <p>Timeless designs for every occasion.</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="collection-card">
+                    <a href="catalog.html?collection=modern-modesty">
+                        <div class="collection-image">
+                            <img src="https://images.pexels.com/photos/1043473/pexels-photo-1043473.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Modern Modesty Collection">
+                        </div>
+                        <div class="collection-info">
+                            <h3>Modern Modesty</h3>
+                            <p>Contemporary styles with a modest touch.</p>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -174,7 +201,41 @@
             </div>
             
             <div class="products-grid" id="newArrivalsGrid">
-                <!-- Products will be loaded dynamically -->
+                <div class="product-card">
+                    <a href="product.html?id=1">
+                        <div class="product-image">
+                            <img src="https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Elegant Black Abaya">
+                            <span class="product-badge" data-i18n="new">New</span>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Elegant Black Abaya</h3>
+                            <p class="product-price">$89.99</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="product-card">
+                    <a href="product.html?id=2">
+                        <div class="product-image">
+                            <img src="https://images.pexels.com/photos/375880/pexels-photo-375880.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Embroidered Silk Abaya">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Embroidered Silk Abaya</h3>
+                            <p class="product-price">$129.99</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="product-card">
+                    <a href="product.html?id=3">
+                        <div class="product-image">
+                            <img src="https://images.pexels.com/photos/1021693/pexels-photo-1021693.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Casual Everyday Abaya">
+                             <span class="product-badge" data-i18n="sale">Sale</span>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Casual Everyday Abaya</h3>
+                            <p class="product-price"><span style="text-decoration: line-through;">$75.00</span> $59.99</p>
+                        </div>
+                    </a>
+                </div>
             </div>
             
             <div class="section-footer">
@@ -290,7 +351,7 @@
     </footer>
 
     <!-- Loading Spinner -->
-    <div class="loading-spinner" id="loadingSpinner">
+    <div class="loading-overlay" id="loadingSpinner" style="display: none;">
         <div class="spinner"></div>
     </div>
 
