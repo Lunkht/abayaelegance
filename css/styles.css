@@ -436,6 +436,9 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   background: linear-gradient(135deg, var(--background-light), #E8F5E8);
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.9) 40%, rgba(255, 255, 255, 0) 70%), url('https://trae-api-sg.mchost.guru/api/ide/v1/text_to_image?prompt=elegant%20woman%20wearing%20beautiful%20black%20abaya%20in%20luxurious%20boutique%20setting%20with%20Islamic%20architectural%20elements&image_size=landscape_16_9');
+  background-size: cover;
+  background-position: center right;
   position: relative;
   overflow: hidden;
 }
