@@ -32,26 +32,55 @@ class App {
   }
 
   async init() {
-    this.setupGlobalUI();
+    await this.setupGlobalUI();
 
     switch (this.currentPage) {
       case 'index':
         await this.initHomePage();
         break;
       case 'catalog':
-        // géré par catalog.js
+        // Géré par catalog.js
         break;
       default:
         console.log('No specific initialization for page:', this.currentPage);
     }
   }
 
-  setupGlobalUI() {
+  async setupGlobalUI() {
     this.setupNavigation();
+    await this.loadNavigationCategories();
     this.setupSearch();
     this.setupMobileMenu();
     this.setupUserMenu();
     this.setupGlobalEventListeners();
+  }
+
+  async loadNavigationCategories() {
+    try {
+      const { data: categories, error } = await supabase
+        .from('categories')
+        .select('name, slug')
+        .order('name', { ascending: true });
+
+      if (error) throw error;
+
+      const desktopMenu = document.getElementById('categoriesMenu');
+      const mobileMenu = document.getElementById('mobileCategoriesMenu');
+
+      const generateHtml = (category) => `<li><a href="catalog.html?category=${category.slug}">${category.name}</a></li>`;
+
+      if (desktopMenu) {
+        desktopMenu.innerHTML = categories.map(generateHtml).join('');
+      }
+
+      if (mobileMenu) {
+        mobileMenu.innerHTML = categories.map(generateHtml).join('');
+      }
+
+    } catch (error) {
+      console.error('Failed to load navigation categories:', error);
+      // Les catégories statiques serviront de fallback en cas d'erreur.
+    }
   }
 
   async loadFeaturedCollections() {

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -20,39 +21,6 @@
     <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css">
     
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org/",
-      "@type": "Product",
-      "name": "",
-      "image": [],
-      "description": "",
-      "brand": {
-        "@type": "Brand",
-        "name": "Abaya Elegance"
-      },
-      "offers": {
-        "@type": "Offer",
-        "url": "",
-        "priceCurrency": "USD",
-        "price": "",
-        "availability": "https://schema.org/InStock"
-      }
-    }
-    </script>
-    <script>
-      (function() {
-        try {
-          var path = window.location.pathname || '';
-          if (path.indexOf('product.html') !== -1) {
-            var qs = window.location.search || '';
-            var hash = window.location.hash || '';
-            window.location.replace('product-details.html' + qs + hash);
-          }
-        } catch (e) {}
-      })();
-    </script>
 </head>
 <body>
     <!-- Header -->
@@ -181,8 +149,8 @@
             <nav>
                 <ol>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="catalog.html">Shop</a></li>
-                    <li id="breadcrumbCategory"><a href="#" data-i18n="category">Catégorie</a></li>
+                    <li><a href="catalog.html" data-i18n="shop">Shop</a></li>
+                    <li id="breadcrumbCategory"><a href="catalog.html" data-i18n="category">Catégorie</a></li>
                     <li id="breadcrumbProduct" data-i18n="product">Produit</li>
                 </ol>
             </nav>
@@ -195,7 +163,7 @@
         <section class="product-details">
             <div class="container">
                 <!-- Loading State -->
-                <div class="loading-state" id="loadingState">
+                <div class="loading-state" id="productLoadingState">
                     <div class="loading-spinner"></div>
                     <p>Loading product details...</p>
                 </div>
@@ -624,11 +592,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-spinner"></div>
     </div>
     
     <!-- Toast Container -->
