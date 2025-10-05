@@ -1,4 +1,21 @@
 // Main JavaScript Module
+// --- Fonctions pour le Spinner de Chargement ---
+const loadingSpinner = document.getElementById('loadingSpinner');
+
+/**
+ * Affiche l'overlay de chargement.
+ */
+window.showSpinner = function() {
+  if (loadingSpinner) loadingSpinner.style.display = 'flex';
+}
+
+/**
+ * Masque l'overlay de chargement.
+ */
+window.hideSpinner = function() {
+  if (loadingSpinner) loadingSpinner.style.display = 'none';
+}
+
 class App {
   constructor() {
     this.currentPage = this.getCurrentPage();
@@ -7,371 +24,143 @@ class App {
 
   getCurrentPage() {
     const path = window.location.pathname;
-    const page = path.split('/').pop() || 'index.html';
-    return page.replace('.html', '');
+    const filename = path.split('/').pop();
+    if (filename === '' || filename === 'index.html') {
+      return 'index';
+    }
+    return filename.replace('.html', '');
   }
 
   async init() {
-    // Show loader at the very beginning
-    const pageLoader = document.getElementById('pageLoader');
-    document.body.classList.add('loading');
+    this.setupGlobalUI();
 
-    try {
-      // Initialize core modules
-      await this.initializeModules();
-      
-      // Setup global event listeners
-      this.setupGlobalEventListeners();
-      
-      // Initialize page-specific functionality
-      await this.initializePage();
-      
-      // Setup navigation
-      this.setupNavigation();
-      
-      // Setup search functionality
-      this.setupSearch();
-      
-      // Setup mobile menu
-      this.setupMobileMenu();
-      
-      // Setup user menu
-      this.setupUserMenu();
-      
-      console.log('App initialized successfully');
-    } catch (error) {
-      console.error('Failed to initialize app:', error);
-    }
-  }
-
-  async initializeModules() {
-    // Wait for auth manager to initialize
-    if (typeof authManager !== 'undefined') {
-      await authManager.init();
-    }
-    
-    // Wait for cart manager to initialize
-    if (typeof cartManager !== 'undefined') {
-      await cartManager.init();
-    }
-  }
-
-  async initializePage() {
     switch (this.currentPage) {
       case 'index':
-      case '':
         await this.initHomePage();
         break;
       case 'catalog':
-        await this.initCatalogPage();
-        break;
-      case 'product':
-        await this.initProductPage();
-        break;
-      case 'cart':
-        await this.initCartPage();
-        break;
-      case 'checkout':
-        await this.initCheckoutPage();
-        break;
-      case 'login':
-        await this.initLoginPage();
-        break;
-      case 'register':
-        await this.initRegisterPage();
-        break;
-      case 'account':
-        await this.initAccountPage();
-        break;
-      case 'admin':
-        await this.initAdminPage();
-        break;
-      case 'about':
-      case 'contact':
-        await this.initStaticPage();
+        // géré par catalog.js
         break;
       default:
         console.log('No specific initialization for page:', this.currentPage);
     }
   }
 
-  async initHomePage() {
-    try {
-      // Load featured collections
-      await this.loadFeaturedCollections();
-      
-      // Load new arrivals
-      await this.loadNewArrivals();
-      
-      // Setup hero carousel if exists
-      this.setupHeroCarousel();
-      
-      // Setup newsletter form
-      this.setupNewsletterForm();
-    } catch (error) {
-      console.error('Failed to initialize home page:', error);
-    }
+  setupGlobalUI() {
+    this.setupNavigation();
+    this.setupSearch();
+    this.setupMobileMenu();
+    this.setupUserMenu();
+    this.setupGlobalEventListeners();
   }
 
   async loadFeaturedCollections() {
     try {
-      const collectionsContainer = document.getElementById('featuredCollections');
+      const collectionsContainer = document.getElementById('collectionsGrid');
       if (!collectionsContainer) return;
 
-      utils.showLoading();
+      showSpinner();
       
       // Get featured categories
-      const categories = await api.supabase.getCategories();
-      const featuredCategories = categories.slice(0, 3); // Show first 3 categories
+      const { data: categories, error } = await supabase.from('categories').select('*').limit(2);
+
+      if (error) throw error;
       
-      collectionsContainer.innerHTML = featuredCategories.map(category => `
-        <div class="collection-card" data-category="${category.slug}">
-          <div class="collection-image">
-            <img src="${category.image_url || '/images/placeholder.jpg'}" alt="${category.name}" loading="lazy">
-            <div class="collection-overlay">
-              <h3>${category.name}</h3>
-              <p>${category.description || ''}</p>
-              <a href="catalog.html?category=${category.slug}" class="btn-secondary">Shop Collection</a>
-            </div>
-          </div>
+      collectionsContainer.innerHTML = categories.map(category => `
+        <div class="collection-card">
+            <a href="catalog.html?category=${category.slug}">
+                <div class="collection-image">
+                    <img src="${category.image_url || 'https://placehold.co/600x400?text=Collection'}" alt="${category.name}">
+                </div>
+                <div class="collection-info">
+                    <h3>${category.name}</h3>
+                    <p>${category.description || 'Découvrez notre collection.'}</p>
+                </div>
+            </a>
         </div>
       `).join('');
     } catch (error) {
       console.error('Failed to load featured collections:', error);
+      const collectionsContainer = document.getElementById('collectionsGrid');
+      if(collectionsContainer) collectionsContainer.innerHTML = `<p class="error-state">Impossible de charger les collections.</p>`;
     } finally {
-      utils.hideLoading();
+      hideSpinner();
     }
   }
 
   async loadNewArrivals() {
     try {
-      const arrivalsContainer = document.getElementById('newArrivals');
+      const arrivalsContainer = document.getElementById('newArrivalsGrid');
       if (!arrivalsContainer) return;
 
-      utils.showLoading();
+      showSpinner();
       
       // Get latest products
-      const products = await api.supabase.getProducts({
-        limit: 8,
-        sortBy: 'created_at',
-        sortOrder: 'desc'
-      });
+      const { data: products, error } = await supabase.from('products').select('*').order('created_at', { ascending: false }).limit(8);
+      
+      if (error) throw error;
+
+      const formatCurrency = (amount) => {
+        // Simple currency formatter, you can make this more robust
+        return `$${Number(amount).toFixed(2)}`;
+      };
       
       arrivalsContainer.innerHTML = products.map(product => {
-        const imageUrl = product.images && product.images.length > 0 ? product.images[0] : '/images/placeholder.jpg';
+        const imageUrl = (product.images && product.images.length > 0) ? product.images[0] : 'https://placehold.co/400x500?text=Abaya';
         const hasDiscount = product.sale_price && product.sale_price < product.price;
         
         return `
           <div class="product-card" data-product-id="${product.id}">
-            <div class="product-image">
-              <img src="${imageUrl}" alt="${product.name}" loading="lazy">
-              ${hasDiscount ? `<span class="discount-badge">${window.i18n.t('sale')}</span>` : ''}
-              ${!product.in_stock ? `<span class="out-of-stock-badge">${window.i18n.t('outOfStock')}</span>` : ''}
-              <div class="product-actions">
-                <button class="btn-icon wishlist-btn" data-product-id="${product.id}">
-                  <i class="far fa-heart"></i>
-                </button>
-                <button class="btn-icon quick-view-btn" data-product-id="${product.id}">
-                  <i class="fas fa-eye"></i>
-                </button>
+            <a href="product.html?id=${product.id}">
+              <div class="product-image">
+                <img src="${imageUrl}" alt="${product.name}" loading="lazy">
+                ${hasDiscount ? `<span class="product-badge" data-i18n="sale">Sale</span>` : ''}
+                ${new Date(product.created_at) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) ? `<span class="product-badge" data-i18n="new">New</span>` : ''}
               </div>
-            </div>
-            
-            <div class="product-info">
-              <h3 class="product-name">
-                <a href="product-details.html?id=${product.id}">${product.name}</a>
-              </h3>
-              
-              <div class="product-price">
-                ${hasDiscount ? `
-                  <span class="current-price">${utils.formatCurrency(product.sale_price)}</span>
-                  <span class="original-price">${utils.formatCurrency(product.price)}</span>
-                ` : `
-                  <span class="current-price">${utils.formatCurrency(product.price)}</span>
-                `}
+              <div class="product-info">
+                <h3 class="product-name">${product.name}</h3>
+                <div class="product-price">
+                  ${hasDiscount ? `
+                    <span class="current-price">${formatCurrency(product.sale_price)}</span>
+                    <span class="original-price" style="text-decoration: line-through;">${formatCurrency(product.price)}</span>
+                  ` : `
+                    <span class="current-price">${formatCurrency(product.price)}</span>
+                  `}
+                </div>
               </div>
-              
-              <div class="product-rating">
-                ${this.renderStars(product.average_rating || 0)}
-                <span class="rating-count">(${product.review_count || 0})</span>
-              </div>
-              
-              <button class="btn-primary add-to-cart" 
-                      data-product-id="${product.id}" 
-                      ${!product.in_stock ? 'disabled' : ''}>
-                ${window.i18n.t(product.in_stock ? 'addToCart' : 'outOfStock')}
-              </button>
-            </div>
+            </a>
           </div>
         `;
       }).join('');
     } catch (error) {
       console.error('Failed to load new arrivals:', error);
+      const arrivalsContainer = document.getElementById('newArrivalsGrid');
+      if(arrivalsContainer) arrivalsContainer.innerHTML = `<p class="error-state">Impossible de charger les nouveaux produits. Veuillez réessayer plus tard.</p>`;
     } finally {
-      utils.hideLoading();
+      hideSpinner();
     }
   }
 
-  renderStars(rating) {
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 >= 0.5;
-    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-    
-    let starsHtml = '';
-    
-    // Full stars
-    for (let i = 0; i < fullStars; i++) {
-      starsHtml += '<i class="fas fa-star"></i>';
+  async initHomePage() {
+    try {
+      // Load featured collections and new arrivals in parallel
+      await Promise.all([
+        this.loadFeaturedCollections(),
+        this.loadNewArrivals()
+      ]);
+    } catch (error) {
+      console.error('Failed to initialize home page:', error);
     }
-    
-    // Half star
-    if (hasHalfStar) {
-      starsHtml += '<i class="fas fa-star-half-alt"></i>';
-    }
-    
-    // Empty stars
-    for (let i = 0; i < emptyStars; i++) {
-      starsHtml += '<i class="far fa-star"></i>';
-    }
-    
-    return starsHtml;
-  }
-
-  setupHeroCarousel() {
-    const carousel = document.querySelector('.hero-carousel');
-    if (!carousel) return;
-
-    const slides = carousel.querySelectorAll('.hero-slide');
-    const prevBtn = carousel.querySelector('.carousel-prev');
-    const nextBtn = carousel.querySelector('.carousel-next');
-    const indicators = carousel.querySelectorAll('.carousel-indicator');
-    
-    let currentSlide = 0;
-    const totalSlides = slides.length;
-    
-    if (totalSlides <= 1) return;
-
-    function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === index);
-      });
-      
-      indicators.forEach((indicator, i) => {
-        indicator.classList.toggle('active', i === index);
-      });
-      
-      currentSlide = index;
-    }
-
-    function nextSlide() {
-      const next = (currentSlide + 1) % totalSlides;
-      showSlide(next);
-    }
-
-    function prevSlide() {
-      const prev = (currentSlide - 1 + totalSlides) % totalSlides;
-      showSlide(prev);
-    }
-
-    // Event listeners
-    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
-    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
-    
-    indicators.forEach((indicator, index) => {
-      indicator.addEventListener('click', () => showSlide(index));
-    });
-
-    // Auto-play
-    setInterval(nextSlide, 5000);
-  }
-
-  setupNewsletterForm() {
-    const form = document.getElementById('newsletterForm');
-    if (!form) return;
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      const emailInput = form.querySelector('input[type="email"]');
-      const email = emailInput.value.trim();
-      
-      if (!utils.validateEmail(email)) {
-        utils.showToast('Please enter a valid email address', 'error');
-        return;
-      }
-      
-      try {
-        utils.showLoading();
-        
-        // Here you would typically send to your newsletter service
-        // For now, we'll just show a success message
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        utils.showToast('Thank you for subscribing to our newsletter!', 'success');
-        emailInput.value = '';
-      } catch (error) {
-        console.error('Newsletter subscription failed:', error);
-        utils.showToast('Failed to subscribe. Please try again.', 'error');
-      } finally {
-        utils.hideLoading();
-      }
-    });
-  }
-
-  async initCatalogPage() {
-    // This will be implemented when we create the catalog page
-    console.log('Catalog page initialization');
-  }
-
-  async initProductPage() {
-    // This will be implemented when we create the product page
-    console.log('Product page initialization');
-  }
-
-  async initCartPage() {
-    if (typeof cartManager !== 'undefined') {
-      cartManager.renderCartItems();
-    }
-  }
-
-  async initCheckoutPage() {
-    // This will be implemented when we create the checkout page
-    console.log('Checkout page initialization');
-  }
-
-  async initLoginPage() {
-    // Auth manager handles login page initialization
-    console.log('Login page initialization');
-  }
-
-  async initRegisterPage() {
-    // Auth manager handles register page initialization
-    console.log('Register page initialization');
-  }
-
-  async initAccountPage() {
-    // This will be implemented when we create the account page
-    console.log('Account page initialization');
-  }
-
-  async initAdminPage() {
-    // This will be implemented when we create the admin page
-    console.log('Admin page initialization');
-  }
-
-  async initStaticPage() {
-    console.log('Initializing static page...');
-    // Static page initialization (about, contact, etc.)
   }
 
   setupNavigation() {
     // Handle navigation links
     const navLinks = document.querySelectorAll('.nav-link');
-    const currentPage = window.location.pathname.split('/').pop();
+    const currentPageFile = window.location.pathname.split('/').pop() || 'index.html';
 
     navLinks.forEach(link => {
-      const linkPage = link.getAttribute('href').split('/').pop();
-      if (linkPage === currentPage) {
+      const linkFile = link.getAttribute('href').split('/').pop();
+      if (linkFile === currentPageFile) {
         link.classList.add('active');
       }
     });
@@ -381,7 +170,7 @@ class App {
     const searchToggle = document.getElementById('searchToggle');
     const searchOverlay = document.getElementById('searchOverlay');
     const searchClose = document.getElementById('searchClose');
-    const searchForm = document.getElementById('searchForm');
+    const searchForm = document.getElementById('searchBox'); // Assuming form is the box
     const searchInput = document.getElementById('searchInput');
     const searchResults = document.getElementById('searchResults');
     
@@ -410,20 +199,6 @@ class App {
 
     // Handle search form
     if (searchForm && searchInput) {
-      let searchTimeout;
-      
-      // Live search as user types
-      searchInput.addEventListener('input', utils.debounce(async (e) => {
-        const query = e.target.value.trim();
-        
-        if (query.length < 2) {
-          if (searchResults) searchResults.innerHTML = '';
-          return;
-        }
-        
-        await this.performSearch(query);
-      }, 300));
-      
       // Handle form submission
       searchForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -433,56 +208,6 @@ class App {
           window.location.href = `catalog.html?search=${encodeURIComponent(query)}`;
         }
       });
-    }
-  }
-
-  async performSearch(query) {
-    try {
-      const searchResults = document.getElementById('searchResults');
-      if (!searchResults) return;
-      
-      // Show loading
-      searchResults.innerHTML = '<div class="search-loading">Searching...</div>';
-      
-      // Search products
-      const products = await api.supabase.getProducts({
-        search: query,
-        limit: 5
-      });
-      
-      if (products.length === 0) {
-        searchResults.innerHTML = '<div class="no-results">No products found</div>';
-        return;
-      }
-      
-      // Render search results
-      searchResults.innerHTML = products.map(product => {
-        const imageUrl = product.images && product.images.length > 0 ? product.images[0] : '/images/placeholder.jpg';
-        const price = product.sale_price || product.price;
-        
-        return `
-          <div class="search-result-item">
-            <img src="${imageUrl}" alt="${product.name}" loading="lazy">
-            <div class="search-result-info">
-              <h4><a href="product-details.html?id=${product.id}">${product.name}</a></h4>
-              <p class="search-result-price">${utils.formatCurrency(price)}</p>
-            </div>
-          </div>
-        `;
-      }).join('');
-      
-      // Add "View all results" link
-      searchResults.innerHTML += `
-        <div class="search-view-all">
-          <a href="catalog.html?search=${encodeURIComponent(query)}">View all results for "${query}"</a>
-        </div>
-      `;
-    } catch (error) {
-      console.error('Search failed:', error);
-      const searchResults = document.getElementById('searchResults');
-      if (searchResults) {
-        searchResults.innerHTML = '<div class="search-error">Search failed. Please try again.</div>';
-      }
     }
   }
 
@@ -555,7 +280,7 @@ class App {
         e.preventDefault();
         
         if (!authManager.isAuthenticated) {
-          utils.showToast('Please sign in to add items to your wishlist', 'info');
+          alert('Please sign in to add items to your wishlist');
           return;
         }
         
@@ -570,7 +295,7 @@ class App {
           icon.classList.toggle('fas');
         }
         
-        utils.showToast(
+        alert(
           button.classList.contains('active') ? 'Added to wishlist' : 'Removed from wishlist',
           'success'
         );
@@ -587,27 +312,11 @@ class App {
         
         // Open quick view modal (implementation would depend on your modal system)
         console.log('Quick view for product:', productId);
-        utils.showToast('Quick view feature coming soon!', 'info');
+        alert('Quick view feature coming soon!');
       }
     });
 
     // Handle scroll to top
-    const scrollToTopBtn = document.getElementById('scrollToTop');
-    if (scrollToTopBtn) {
-      window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) {
-          scrollToTopBtn.style.display = 'block';
-        } else {
-          scrollToTopBtn.style.display = 'none';
-        }
-      });
-      
-      scrollToTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    }
-
-    // Handle scroll to top button
     const scrollToTopBtn = document.getElementById('scrollToTop');
     if (scrollToTopBtn) {
       window.addEventListener('scroll', () => {
